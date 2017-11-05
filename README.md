@@ -48,7 +48,7 @@ export class Item implements IItem {
 
 }
 const __props_Item: string[] = ['itemId', 'optionalString', timestamp];
-const __maps_Item = { billDate: __protogen.Timestamp };
+const __maps_Item = { timestamp: __protogen.Timestamp };
 ```
 
 The constructor is used to create the object from the JSON encoded version of the protobuf. The contstructor maps the fields from their JSON encoded type (eg. string for Timestamp) to their logical Typescript conterpart (eg. Date for Timestamp). The static method `FromInterface` is used to create the class from a javascript object with the logical corresponding types (eg. Date for Timestamp).
