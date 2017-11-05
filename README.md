@@ -1,5 +1,5 @@
 # protobuf-json-gen
-C# helper application for creating Typescript classes from C# protobuf IMessages meant to handle JSON encoded protobuf messages.
+C# helper application for creating Typescript classes meant to read JSON encoded protobuf messages.
 
 Work in progress.
 
