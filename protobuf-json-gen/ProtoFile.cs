@@ -57,11 +57,16 @@ namespace Plaisted.ProtobufJsonGen
             contents = contents + Environment.NewLine + string.Join(Environment.NewLine, Enums.Where(c => c.Namespace == nameSpace).Select(e => e.Contents));
             var toAdd = SubNamespaces.Where(ns => ns.StartsWith(nameSpace+"."))
                 .Select(ns=> (Namespace: ns, Sub: ns.Remove(0, nameSpace.Length+1).Split('.')[0])).ToList();
-            foreach (var ns in toAdd)
+            foreach (var sub in toAdd.Select(n=>n.Sub).Distinct())
             {
-                var subNs = GetNamespaceContents(ns.Namespace);
+                var subContents = "";
+                //foreach (var ns in toAdd.Where(n=>n.Sub == sub))
+                //{
+                    subContents += GetNamespaceContents(nameSpace + "." + sub) + Environment.NewLine;
+                //}
+
                 contents = contents + Environment.NewLine +
-                    $"export namespace {ns.Sub} {{" + Environment.NewLine + subNs.AddTabs(1) + Environment.NewLine + "}";
+                    $"export namespace {sub} {{" + Environment.NewLine + subContents.AddTabs(1) + Environment.NewLine + "}";
             }
             return contents;
         }

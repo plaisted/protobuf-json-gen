@@ -34,9 +34,28 @@ namespace Plaisted.ProtobufJsonGen
             foreach (var package in packageNames.OrderBy(p=>p.Count(c=>c == '.')).ToList())
             {
                 if (removed.Contains(package)) { continue; }
-                var pi = new ProtoFile(package);
+                var subNames = package;
+                var useSubname = false;
+                while (subNames.Length > 0)
+                {
+                    if (packageNames.Where(p => p.StartsWith(subNames) && p != package).Count() > 0)
+                    {
+                        useSubname = true;
+                        break;
+                    }
+                    var split = subNames.Split('.');
+                    subNames = string.Join('.', split.Take(split.Count() - 1));
+                }
+                
+                if (!useSubname)
+                {
+                    subNames = package;
+                }
+
+                var pi = new ProtoFile(subNames);
                 packages.Add(pi);
-                packageNames.Where(p => p.StartsWith(package) && p != package).ToList().ForEach(p => {
+                packageNames.Where(p => p.StartsWith(subNames + ".")).ToList();
+                packageNames.ForEach(p => {
                     removed.Add(p);
                     pi.SubNamespaces.Add(p);
                 });

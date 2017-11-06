@@ -8,7 +8,7 @@ namespace Plaisted.ProtobufJsonGen
         {
             Console.WriteLine("Hello World!");
             GenerateTypescript.FromDll(
-                @"C:\Users\mplaisted\Source\Repos\BI.EBPP.API\src\EBPP.Interop\bin\Debug\netcoreapp2.0\EBPP.Interop.dll");
+                @"C:\Users\mplaisted\Source\Repos\BI.CLT.EBPP.AuthServer\src\EBPP.Authentication.Interop\bin\Debug\netcoreapp2.0\EBPP.Authentication.Interop.dll");
         }
     }
 }
